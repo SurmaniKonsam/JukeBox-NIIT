@@ -1,0 +1,76 @@
+use surmanidb;
+
+create table Operation(
+	opKey int primary key auto_increment,
+    OperationsPerformed varchar(100) not null
+	);
+    
+    insert into Operation(OperationsPerformed) values
+    ('Fund Transfer'),
+    ('deposite Money'),
+    ('online payment'),
+    ('cash withdrawal'),
+    ('Calculate interest');
+    select * from Operation;
+    drop table Operation;
+    
+## now i will insert values here (fundtransfer,deposite,debit,onlinePayment)
+
+create table SavingAccount(
+	savingId int primary key auto_increment,
+	savingAccountNumber bigint not null, ## account number must be shown as a duplicate value it will get replaced only  when we are creating inserting new value.
+    availableBalance int not null, ## same goes for the available balance it will only get reflected if you have debited or deposited as it will  same value.
+    SavingAccountTransactionDetail varchar(100) default 'transaction_Detail' not null
+    );
+    insert into SavingAccount(savingAccountNumber,availableBalance) values
+    (234234,123),
+    (234234,12345);
+    
+    select * from SavingAccount;
+    drop table SavingAccount;
+    ## after this in the intellij i will provide option for operations to be performed to user and ask these are services available for saving account.
+
+    
+    
+
+create table PaymentAccount(
+	paymentId int primary key auto_increment,
+    paymentAccountNumber bigint not null,
+    availableBalance int not null,
+    PaymentAccountTransactionDetail varchar(100) default 'transactionDetails' not null
+    );
+	insert into PaymentAccount(paymentAccountNumber,availableBalance) values
+    (234234,123),
+    (234234,12345);
+    select * from PaymentAccount;
+    drop table PaymentAccount;
+    
+    create table SavingAccountTransactionDetails(
+		savingTransactionId int primary key auto_increment,
+        TransactionDate datetime not null, ## need to use now() to display current date and time.
+        availableBalance int not null,
+        amountDebited int not null,
+        amountDeposited int not null
+        );
+        insert into SavingAccountTransactionDetails(TransactionDate,availableBalance,amountDebited,amountDeposited) values
+        (now(),12345,200,500);
+        select * from SavingAccountTransactionDetails;
+        drop table SavingAccountTransactionDetails;
+        
+        
+        
+        
+	create table PaymentAccountTransactionDetails(
+		paymentTransactionId int primary key auto_increment,
+        TransactionDate datetime not null, ## need to use now() to display current date and time
+        availableBalance int not null,
+        amountDebited int not null,
+        amountDeposited int not null
+        );
+        insert into PaymentAccountTransactionDetails(TransactionDate,availableBalance,amountDebited,amountDeposited) values
+        (now(),20000,200,500);
+        select * from PaymentAccountTransactionDetails;
+        drop table PaymentAccountTransactionDetails;
+        
+        ## amount debited will get subtract from the available balance 
+        ## amount credited will add to the available balance.
